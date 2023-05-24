@@ -1,17 +1,18 @@
-import React from "react";
-
 const TheirMessage = ({ lastMessage, message }) => {
   const isFirstMessageByUser =
     !lastMessage || lastMessage.sender.username !== message.sender.username;
+
   return (
     <div className="message-row">
       {isFirstMessageByUser && (
         <div
           className="message-avatar"
-          style={{ backgroundImage: `url(${message?.sender?.avatar})` }}
+          style={{
+            backgroundImage: message.sender && `url(${message.sender.avatar})`,
+          }}
         />
       )}
-      {message?.attachments?.length > 0 ? (
+      {message.attachments && message.attachments.length > 0 ? (
         <img
           src={message.attachments[0].file}
           alt="message-attachment"
@@ -23,7 +24,7 @@ const TheirMessage = ({ lastMessage, message }) => {
           className="message"
           style={{
             float: "left",
-            backgroundColor: "#cabcdc",
+            backgroundColor: "#CABCDC",
             marginLeft: isFirstMessageByUser ? "4px" : "48px",
           }}
         >
